@@ -16,21 +16,29 @@ public interface ServiceConfig extends Config {
   @DefaultValue("4")
   @Key("services.count.flats")
   Integer countFlats();
-  
+
   @DefaultValue("1")
   @Key("services.count.devices")
   Integer countDevices();
-  
+
   @DefaultValue("30")
-  @Key("services.scheduled.delay")
-  Integer scheduledDelay();
-  
-  @DefaultValue("3")
+  @Key("services.scheduled.delay.observe")
+  Integer scheduledDelayObserve();
+
+  @DefaultValue("20")
   @Key("services.pressure_value")
   Integer pressureValue();
+
+  @DefaultValue("5")
+  @Key("services.scheduled.delay.temperature")
+  Integer scheduledDelayTemperature();
   
-  @DefaultValue("3")
-  @Key("services.temperature.change.interval")
-  Integer temperatureChangeInterval();
+  @DefaultValue("0")
+  @Key("services.temperature.min")
+  Integer temperatureMin();
+
+  @DefaultValue("15")
+  @Key("services.temperature.max")
+  Integer temperatureMax();
   
 }

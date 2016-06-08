@@ -13,7 +13,7 @@ public class Building {
   private final int numberBuilding;
   private List<Flat> flats = new ArrayList<Flat>();
   private double presure;
-  
+
   public Building(int countFlats, int countDevices, double presure) {
     for (int i = 0; i < countFlats; i++) {
       flats.add(new Flat(countDevices));
@@ -21,11 +21,11 @@ public class Building {
     numberBuilding = ++countBuildings;
     this.presure = presure;
   }
-  
+
   public double getPresure() {
     return presure;
   }
-  
+
   public void setPresure(double presure) {
     this.presure = presure;
   }
@@ -58,7 +58,7 @@ public class Building {
     if (!flats.isEmpty()) {
       List<JSONObject> list = new ArrayList<JSONObject>();
       for (Flat flat : flats) {
-        list.addAll(flat.getObservations(timestamp));
+        list.addAll(flat.getObservations(timestamp, presure));
       }
       return list;
     }

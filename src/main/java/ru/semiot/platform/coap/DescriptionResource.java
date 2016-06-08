@@ -8,15 +8,15 @@ public class DescriptionResource extends CoapResource {
 
   private static final String name = "desc";
   private String description;
-  
+
   public DescriptionResource(String description) {
     super(name);
     this.description = description;
   }
-  
+
   @Override
   public void handleGET(CoapExchange exchange) {
-      exchange.respond(CoAP.ResponseCode.CONTENT, description);
+    exchange.respond(CoAP.ResponseCode.CONTENT, description);
   }
-  
+
 }

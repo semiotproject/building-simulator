@@ -6,7 +6,7 @@ import org.eclipse.californium.core.server.resources.CoapExchange;
 import ru.semiot.platform.model.Building;
 
 public class BuildingRegulatorResource extends CoapResource {
- 
+
   private final Building building;
 
   public BuildingRegulatorResource(Building building) {

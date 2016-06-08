@@ -11,32 +11,32 @@ public class Flat {
   private static int countFlats = 0;
   private final int numberFlat;
   private List<Device> devices = new ArrayList<Device>();
-  
+
   public Flat(int countDevices) {
-    for(int i =0; i< countDevices; i++) {
+    for (int i = 0; i < countDevices; i++) {
       devices.add(new Device());
     }
     numberFlat = ++countFlats;
   }
-  
+
   public JSONObject getDescription() {
     JSONObject jsonObject = new JSONObject();
     jsonObject.put("flat_number", numberFlat);
-    if(!devices.isEmpty()) {
+    if (!devices.isEmpty()) {
       JSONArray jsonArray = new JSONArray();
-      for(Device device : devices) {
+      for (Device device : devices) {
         jsonArray.put(device.getDescription());
       }
       jsonObject.put("flat_sensors", jsonArray);
     }
     return jsonObject;
   }
-  
-  public List<JSONObject> getObservations(long timestamp) {
+
+  public List<JSONObject> getObservations(long timestamp, double presure) {
     if (!devices.isEmpty()) {
       List<JSONObject> list = new ArrayList<JSONObject>();
       for (Device device : devices) {
-        list.add(device.getObservation(timestamp));
+        list.add(device.getObservation(timestamp, presure));
       }
       return list;
     }
