@@ -13,10 +13,6 @@ public class DescriptionResource extends CoapResource {
     super(name);
     this.description = description;
   }
-
-  /* generateDescription() {
-    
-  } */
   
   @Override
   public void handleGET(CoapExchange exchange) {

@@ -9,15 +9,18 @@ public class BuildingObserver extends CoapServer implements Observer {
 
   private ObservationsResource observations;
   private DescriptionResource description;
+  private RegulatorResource regulator;
   
-  public BuildingObserver(final int port, String descr) {
+  public BuildingObserver(final int port, String descr, double pressure) {
     super(port);
 
     observations = new ObservationsResource();
     description = new DescriptionResource(descr);
-
+    regulator = new RegulatorResource(pressure);
+    
     add(observations);
     add(description);
+    add(regulator);
   }
 
   @Override

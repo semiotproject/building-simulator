@@ -27,6 +27,6 @@ public interface ServiceConfig extends Config {
   
   @DefaultValue("3")
   @Key("services.pressure_value")
-  Integer pressure_value();
+  Integer pressureValue();
   
 }

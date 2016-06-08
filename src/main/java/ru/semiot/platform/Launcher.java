@@ -45,7 +45,7 @@ public class Launcher {
     for (int i = 0; i < config.countBuildings(); i++) {
       buildings.add(new Building(config.countFlats(), config.countDevices()));
     }
-    server = new BuildingObserver(5683, getDescription());
+    server = new BuildingObserver(5683, getDescription(), config.pressureValue());
     scheduler = Executors.newScheduledThreadPool(1);
     scheduledDevice = new ScheduledDevice(server, buildings);
   }
