@@ -1,4 +1,4 @@
-package ru.semiot.platform;
+package ru.semiot.platform.coap;
 
 import org.eclipse.californium.core.CoapResource;
 import org.eclipse.californium.core.coap.CoAP;

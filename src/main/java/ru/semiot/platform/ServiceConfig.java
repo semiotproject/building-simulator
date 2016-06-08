@@ -29,4 +29,8 @@ public interface ServiceConfig extends Config {
   @Key("services.pressure_value")
   Integer pressureValue();
   
+  @DefaultValue("3")
+  @Key("services.temperature.change.interval")
+  Integer temperatureChangeInterval();
+  
 }

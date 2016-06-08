@@ -1,8 +1,9 @@
-package ru.semiot.platform;
+package ru.semiot.platform.coap;
 
 import org.eclipse.californium.core.CoapResource;
 import org.eclipse.californium.core.coap.CoAP;
 import org.eclipse.californium.core.server.resources.CoapExchange;
+import ru.semiot.platform.model.Building;
 
 public class BuildingRegulatorResource extends CoapResource {
  

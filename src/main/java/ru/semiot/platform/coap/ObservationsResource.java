@@ -1,4 +1,4 @@
-package ru.semiot.platform;
+package ru.semiot.platform.coap;
 
 import static org.eclipse.californium.core.coap.CoAP.ResponseCode.CONTENT;
 import static org.eclipse.californium.core.coap.MediaTypeRegistry.TEXT_PLAIN;

@@ -1,6 +1,7 @@
-package ru.semiot.platform;
+package ru.semiot.platform.coap;
 
 import org.eclipse.californium.core.CoapServer;
+import ru.semiot.platform.model.Building;
 
 import java.util.List;
 import java.util.Observable;

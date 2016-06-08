@@ -1,4 +1,4 @@
-package ru.semiot.platform;
+package ru.semiot.platform.model;
 
 import org.json.JSONObject;
 

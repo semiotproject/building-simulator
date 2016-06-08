@@ -4,6 +4,9 @@ import static java.util.concurrent.TimeUnit.SECONDS;
 
 import org.aeonbits.owner.ConfigFactory;
 import org.json.JSONArray;
+import ru.semiot.platform.coap.BuildingObserver;
+import ru.semiot.platform.model.Building;
+import ru.semiot.platform.scheduler.ScheduledDevice;
 
 import java.util.ArrayList;
 import java.util.List;

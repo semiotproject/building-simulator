@@ -1,6 +1,8 @@
-package ru.semiot.platform;
+package ru.semiot.platform.scheduler;
 
 import org.json.JSONObject;
+import ru.semiot.platform.coap.BuildingObserver;
+import ru.semiot.platform.model.Building;
 
 import java.util.ArrayList;
 import java.util.List;
