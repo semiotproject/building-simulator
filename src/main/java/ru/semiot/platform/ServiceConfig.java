@@ -41,4 +41,8 @@ public interface ServiceConfig extends Config {
   @Key("services.temperature.max")
   Integer temperatureMax();
   
+  @DefaultValue("22")
+  @Key("services.temperature.optimum")
+  Integer temperatureOptimum();
+  
 }

@@ -19,14 +19,12 @@ public class ScheduledObserve implements Runnable {
   }
 
   public void run() {
-    // JSONArray jsonArray = new JSONArray();
     List<JSONObject> list = new ArrayList<JSONObject>();
     for (Building building : buildings) {
-      // jsonArray.put(building.getObservations(System.currentTimeMillis()));
       list.addAll(building.getObservations(System.currentTimeMillis()));
     }
 
-    System.out.println(i);
+    System.out.println("Observer update.");
     observer.update(null, list.toString());
 
   }

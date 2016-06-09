@@ -7,18 +7,18 @@ public class Device {
   // TODO
   // t улицы = 24 - 50 * x
   // x - рычаг (0 - 100), остальное зависимость из графика
-  private static double normalTemperature = 22;
+  private static double optimumTemperature = 22;
   
   private static int countDevices = 0;
   private final int numberDevice;
-  private double temperature = 22;
+  private double temperature;
 
   // int Min = 16;
   // int Max = 28;
 
   public Device() {
     numberDevice = ++countDevices;
-    temperature = Math.random() * 4 + 20;
+    temperature = optimumTemperature - 2 + Math.random() * 4;
   }
 
   public JSONObject getDescription() {
@@ -30,7 +30,7 @@ public class Device {
   }
 
   public JSONObject getObservation(long timestamp, double presure) {
-    double shiftStreet = temperature - normalTemperature - (50 * presure / 100 - 24 + StreetTemperature.getTemperature()) / 2;
+    double shiftStreet = temperature - optimumTemperature - (50 * presure / 100 - 24 + StreetTemperature.getTemperature()) / 2;
     // берем от шифта половину (которая попадает в комнату) и в разных квартирах воздействие от 0.5 до 1
     temperature = temperature - shiftStreet - 2 + Math.random() * 4; 
     JSONObject jsonObject = new JSONObject();
@@ -41,4 +41,9 @@ public class Device {
 
     return jsonObject;
   }
+  
+  public static void setOptimumTemperature(double optimumT) {
+    optimumTemperature = optimumT;
+  }
+  
 }

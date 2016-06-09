@@ -7,6 +7,7 @@ import org.aeonbits.owner.ConfigFactory;
 import org.json.JSONArray;
 import ru.semiot.platform.coap.BuildingObserver;
 import ru.semiot.platform.model.Building;
+import ru.semiot.platform.model.Device;
 import ru.semiot.platform.scheduler.ScheduledObserve;
 import ru.semiot.platform.scheduler.ScheduledTemperature;
 
@@ -46,7 +47,8 @@ public class Launcher {
   private static void init() {
     StreetTemperature.setMinTemperature(config.temperatureMin());
     StreetTemperature.setMaxTemperature(config.temperatureMax());
-    // StreetTemperature.setTemperature(t);
+    // StreetTemperature.setTemperature(t); 
+    Device.setOptimumTemperature(config.temperatureOptimum());
     
     for (int i = 0; i < config.countBuildings(); i++) {
       buildings

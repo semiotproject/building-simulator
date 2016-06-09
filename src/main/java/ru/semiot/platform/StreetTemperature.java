@@ -24,6 +24,7 @@ public class StreetTemperature {
   
   public static void genTemperature() {
     temperature = min + Math.random() * (max - min);
+    System.out.println("temperature = " + temperature);
   }
   
 }
