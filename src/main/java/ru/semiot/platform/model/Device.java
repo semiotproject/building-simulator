@@ -5,10 +5,10 @@ import ru.semiot.platform.StreetTemperature;
 
 public class Device {
   // TODO
-  // t улицы = 24 - 50 * x
-  // x - рычаг (0 - 100), остальное зависимость из графика
+  // t street = 24 - 50 * x
+  // x - presure (0 - 100)
   private static double optimumTemperature = 22;
-  
+
   private static int countDevices = 0;
   private final int numberDevice;
   private double temperature;
@@ -30,9 +30,11 @@ public class Device {
   }
 
   public JSONObject getObservation(long timestamp, double presure) {
-    double shiftStreet = temperature - optimumTemperature - (50 * presure / 100 - 24 + StreetTemperature.getTemperature()) / 2;
-    // берем от шифта половину (которая попадает в комнату) и в разных квартирах воздействие от 0.5 до 1
-    temperature = temperature - shiftStreet - 2 + Math.random() * 4; 
+    double shiftStreet = temperature - optimumTemperature
+        - (50 * presure / 100 - 24 + StreetTemperature.getTemperature()) / 2;
+    // take half of the shift (which falls into the room) and the impact of different apartments
+    // from 0.5 to 1
+    temperature = temperature - shiftStreet - 2 + Math.random() * 4;
     JSONObject jsonObject = new JSONObject();
     jsonObject.put("sensor_id", numberDevice);
     // jsonObject.put("value", Min + (int) (Math.random() * (Max - Min)));
@@ -41,9 +43,9 @@ public class Device {
 
     return jsonObject;
   }
-  
+
   public static void setOptimumTemperature(double optimumT) {
     optimumTemperature = optimumT;
   }
-  
+
 }
