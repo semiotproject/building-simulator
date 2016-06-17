@@ -3,6 +3,8 @@ package ru.semiot.platform.model;
 import org.json.JSONObject;
 import ru.semiot.platform.StreetTemperature;
 
+import java.util.Locale;
+
 public class Device {
   // TODO
   // t street = 24 - 50 * x
@@ -38,7 +40,7 @@ public class Device {
     JSONObject jsonObject = new JSONObject();
     jsonObject.put("sensor_id", numberDevice);
     // jsonObject.put("value", Min + (int) (Math.random() * (Max - Min)));
-    jsonObject.put("value", temperature);
+    jsonObject.put("value", String.format(Locale.ENGLISH, "%.1f", temperature)); 
     jsonObject.put("timestamp", timestamp);
 
     return jsonObject;

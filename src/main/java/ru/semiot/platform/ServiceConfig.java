@@ -45,4 +45,8 @@ public interface ServiceConfig extends Config {
   @Key("services.temperature.optimum")
   Integer temperatureOptimum();
   
+  @DefaultValue("3")
+  @Key("services.count.observations.transition.extremum")
+  Integer countObservationInTransitionExtremum();
+  
 }

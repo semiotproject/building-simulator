@@ -5,6 +5,8 @@ import static java.util.concurrent.TimeUnit.SECONDS;
 
 import org.aeonbits.owner.ConfigFactory;
 import org.json.JSONArray;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import ru.semiot.platform.coap.BuildingObserver;
 import ru.semiot.platform.model.Building;
 import ru.semiot.platform.model.Device;
@@ -19,6 +21,8 @@ import java.util.concurrent.ScheduledFuture;
 
 public class Launcher {
 
+  private static final Logger logger = LoggerFactory.getLogger(Launcher.class);
+
   private static final ServiceConfig config = ConfigFactory.create(ServiceConfig.class);
 
   private static ScheduledExecutorService schedulerObserve;
@@ -30,7 +34,7 @@ public class Launcher {
   private static ScheduledFuture handleTemperature = null;
 
   private static List<Building> buildings = new ArrayList<Building>();
-  
+
   private static BuildingObserver server;
 
   public static void main(String[] args) {
@@ -47,9 +51,11 @@ public class Launcher {
   private static void init() {
     StreetTemperature.setMinTemperature(config.temperatureMin());
     StreetTemperature.setMaxTemperature(config.temperatureMax());
-    // StreetTemperature.setTemperature(t); 
+    StreetTemperature
+        .setCountObservationInTransitionExtremum(config.countObservationInTransitionExtremum());
+    // StreetTemperature.setTemperature(t);
     Device.setOptimumTemperature(config.temperatureOptimum());
-    
+
     for (int i = 0; i < config.countBuildings(); i++) {
       buildings
           .add(new Building(config.countFlats(), config.countDevices(), config.pressureValue()));
@@ -80,8 +86,8 @@ public class Launcher {
       stopSheduledObserve();
     handleObserve = schedulerObserve.scheduleAtFixedRate(scheduledObserve, 5,
         config.scheduledDelayObserve(), SECONDS);
-    System.out.println("Scheduled observe started. Repeat will do every "
-        + String.valueOf(config.scheduledDelayObserve()) + " seconds");
+    logger.info("Scheduled observe started. Repeat will do every {} seconds",
+        String.valueOf(config.scheduledDelayObserve()));
   }
 
   public static void stopSheduledObserve() {
@@ -90,7 +96,7 @@ public class Launcher {
 
     handleObserve.cancel(true);
     handleObserve = null;
-    System.out.println("Scheduled observe stoped");
+    logger.info("Scheduled observe stoped");
   }
 
   public static void startSheduledTemperature() {
@@ -98,8 +104,8 @@ public class Launcher {
       stopSheduledTemperature();
     handleTemperature = schedulerTemperature.scheduleAtFixedRate(scheduledTemperature, 0,
         config.scheduledDelayTemperature(), MINUTES);
-    System.out.println("Scheduled temperature started. Repeat will do every "
-        + String.valueOf(config.scheduledDelayTemperature()) + " minutes");
+    logger.info("Scheduled temperature started. Repeat will do every {} minutes",
+        String.valueOf(config.scheduledDelayTemperature()));
   }
 
   public static void stopSheduledTemperature() {
@@ -108,7 +114,7 @@ public class Launcher {
 
     handleTemperature.cancel(true);
     handleTemperature = null;
-    System.out.println("Scheduled temperature stoped");
+    logger.info("Scheduled temperature stoped");
   }
-  
+
 }
