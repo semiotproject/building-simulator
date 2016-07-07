@@ -4,10 +4,9 @@ import static java.util.concurrent.TimeUnit.MINUTES;
 import static java.util.concurrent.TimeUnit.SECONDS;
 
 import org.aeonbits.owner.ConfigFactory;
-import org.json.JSONArray;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import ru.semiot.platform.coap.BuildingObserver;
+import ru.semiot.platform.coap.BuildingsServer;
 import ru.semiot.platform.model.Building;
 import ru.semiot.platform.model.Device;
 import ru.semiot.platform.scheduler.ScheduledObserve;
@@ -35,7 +34,7 @@ public class Launcher {
 
   private static List<Building> buildings = new ArrayList<Building>();
 
-  private static BuildingObserver server;
+  private static BuildingsServer server;
 
   public static void main(String[] args) {
     init();
@@ -60,25 +59,13 @@ public class Launcher {
       buildings
           .add(new Building(config.countFlats(), config.countDevices(), config.pressureValue()));
     }
-    server = new BuildingObserver(5683, getDescription(), buildings);
+    server = new BuildingsServer(5683, buildings);
 
     schedulerObserve = Executors.newScheduledThreadPool(1);
-    scheduledObserve = new ScheduledObserve(server, buildings);
+    scheduledObserve = new ScheduledObserve(buildings);
 
     schedulerTemperature = Executors.newScheduledThreadPool(1);
     scheduledTemperature = new ScheduledTemperature();
-  }
-
-  private static String getDescription() {
-    if (!buildings.isEmpty()) {
-      JSONArray jsonArray = new JSONArray();
-      for (Building building : buildings) {
-        jsonArray.put(building.getDescription());
-      }
-
-      return jsonArray.toString();
-    }
-    return "";
   }
 
   public static void startSheduledObserve() {

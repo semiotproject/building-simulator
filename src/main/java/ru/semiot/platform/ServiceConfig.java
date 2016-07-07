@@ -21,7 +21,7 @@ public interface ServiceConfig extends Config {
   @Key("services.count.devices")
   Integer countDevices();
 
-  @DefaultValue("30")
+  @DefaultValue("10")
   @Key("services.scheduled.delay.observe")
   Integer scheduledDelayObserve();
 
@@ -29,7 +29,7 @@ public interface ServiceConfig extends Config {
   @Key("services.pressure_value")
   Integer pressureValue();
 
-  @DefaultValue("5")
+  @DefaultValue("1")
   @Key("services.scheduled.delay.temperature")
   Integer scheduledDelayTemperature();
   
@@ -45,7 +45,7 @@ public interface ServiceConfig extends Config {
   @Key("services.temperature.optimum")
   Integer temperatureOptimum();
   
-  @DefaultValue("3")
+  @DefaultValue("1")
   @Key("services.count.observations.transition.extremum")
   Integer countObservationInTransitionExtremum();
   

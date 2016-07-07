@@ -4,12 +4,12 @@ import org.eclipse.californium.core.CoapResource;
 import org.eclipse.californium.core.coap.CoAP;
 import org.eclipse.californium.core.server.resources.CoapExchange;
 
-public class DescriptionResource extends CoapResource {
+public class BuildingDescriptionResource extends CoapResource {
 
   private static final String name = "desc";
   private String description;
 
-  public DescriptionResource(String description) {
+  public BuildingDescriptionResource(String description) {
     super(name);
     this.description = description;
   }

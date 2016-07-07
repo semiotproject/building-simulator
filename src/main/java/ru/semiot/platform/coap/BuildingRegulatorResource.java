@@ -11,10 +11,11 @@ public class BuildingRegulatorResource extends CoapResource {
 
   private static final Logger logger = LoggerFactory.getLogger(BuildingRegulatorResource.class);
 
+  private static final String name = "reg";
   private final Building building;
 
   public BuildingRegulatorResource(Building building) {
-    super(String.valueOf(building.getBuildingNumber()));
+    super(name);
     this.building = building;
   }
 
