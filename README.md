@@ -1,4 +1,4 @@
-# Table with a description of the file config.properties.
+# Table with a description of config.properties file.
 
 | Key        | Description       |
 | :-------------: | :-------------: | 
