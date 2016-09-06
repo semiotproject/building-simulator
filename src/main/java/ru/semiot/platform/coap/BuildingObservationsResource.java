@@ -33,7 +33,7 @@ public class BuildingObservationsResource extends CoapResource implements Observ
     /**
      * Details: https://github.com/eclipse/californium/issues/70
      **/
-    exchange.setMaxAge(config.scheduledDelayObserve() * 10);
+    exchange.setMaxAge(config.scheduledDelayObserve() + config.maxAgeDelay());
     exchange.respond(CONTENT, observations, TEXT_PLAIN);
   }
 

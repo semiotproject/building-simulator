@@ -48,5 +48,8 @@ public interface ServiceConfig extends Config {
   @DefaultValue("1")
   @Key("services.count.observations.transition.extremum")
   Integer countObservationInTransitionExtremum();
+
+  @DefaultValue("15")
+  Integer maxAgeDelay();
   
 }
