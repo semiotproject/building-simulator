@@ -7,7 +7,7 @@ import ru.semiot.platform.coap.BuildingObservationsResource;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Building {
+public class Building implements Comparable<Building> {
 
   private static int countBuildings = 0;
 
@@ -15,33 +15,43 @@ public class Building {
   private List<Flat> flats = new ArrayList<Flat>();
   private double presure;
   private BuildingObservationsResource bor = null;
+  private long timeForObserve = 0;
 
-  public Building(int countFlats, int countDevices, double presure) {
+  public Building(int countFlats, int countDevices, double presure, long timeForObserve) {
     for (int i = 0; i < countFlats; i++) {
       flats.add(new Flat(countDevices));
     }
     numberBuilding = ++countBuildings;
     this.presure = presure;
+    this.timeForObserve = timeForObserve;
   }
 
   public double getPresure() {
     return presure;
   }
 
-  public void setBuildingObservationsResource(BuildingObservationsResource bor) {
-    this.bor = bor;
-  }
-
   public void setPresure(double presure) {
     this.presure = presure;
+  }
+
+  public BuildingObservationsResource getBuildingObservationsResource() {
+    return bor;
+  }
+
+  public void setBuildingObservationsResource(BuildingObservationsResource bor) {
+    this.bor = bor;
   }
 
   public int getBuildingNumber() {
     return numberBuilding;
   }
 
-  public BuildingObservationsResource getBuildingObservationsResource() {
-    return bor;
+  public void setTimeForObserve(long timeForObserve) {
+    this.timeForObserve = timeForObserve;
+  }
+
+  public long getTimeForObserve() {
+    return timeForObserve;
   }
 
   public void updateBuildObsRes() {
@@ -79,6 +89,12 @@ public class Building {
       return list;
     }
     return null;
+  }
+
+  @Override
+  public int compareTo(Building building2) {
+    return timeForObserve == building2.getTimeForObserve() ? 0
+        : timeForObserve < building2.getTimeForObserve() ? -1 : 1;
   }
 
 }

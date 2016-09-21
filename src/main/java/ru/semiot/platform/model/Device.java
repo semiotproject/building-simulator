@@ -36,7 +36,7 @@ public class Device {
         - (50 * presure / 100 - 24 + StreetTemperature.getTemperature()) / 2;
     // take half of the shift (which falls into the room) and the impact of different apartments
     // from 0.5 to 1
-    temperature = temperature - shiftStreet - 2 + Math.random() * 4;
+    temperature = temperature - shiftStreet - 0.5 + Math.random() * 1;
     JSONObject jsonObject = new JSONObject();
     jsonObject.put("sensor_id", numberDevice);
     // jsonObject.put("value", Min + (int) (Math.random() * (Max - Min)));

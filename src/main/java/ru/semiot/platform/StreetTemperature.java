@@ -3,6 +3,8 @@ package ru.semiot.platform;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Random;
+
 public class StreetTemperature {
 
   private static final Logger logger = LoggerFactory.getLogger(StreetTemperature.class);
@@ -14,6 +16,7 @@ public class StreetTemperature {
   private static double temperature = 0;
   private static double min = 0; // default
   private static double max = 15; // default
+  private static Random random = new Random();
 
   public static double getTemperature() {
     return temperature;
@@ -35,24 +38,32 @@ public class StreetTemperature {
     countObservationInTransitionExtremum = count;
   }
 
+  public static void setRandom(Random randomS) {
+    random = randomS;
+  }
+
+  public static double getRandomRateValue() {
+    return Double.valueOf(random.nextInt(100)) / 100;
+  }
+
   public static void genTemperature() {
-    if (currentCountObservation > countObservationInTransitionExtremum
-        || prevTemperature == -999) {
+    if (currentCountObservation > countObservationInTransitionExtremum || prevTemperature == -999) {
       if (prevTemperature == -999) {
-        prevTemperature = min + Math.random() * (max - min);
+        prevTemperature = min + getRandomRateValue() * (max - min);
       } else {
         prevTemperature = nextTemperature;
       }
-      nextTemperature = min + Math.random() * (max - min);
+      nextTemperature = min + getRandomRateValue() * (max - min);
       currentCountObservation = 0;
       logger.info("Previous temperature = {}, next temperature = {}", prevTemperature,
           nextTemperature);
     }
-    if(currentCountObservation == countObservationInTransitionExtremum) {
+    if (currentCountObservation == countObservationInTransitionExtremum) {
       temperature = nextTemperature;
     } else {
-      double shift = (prevTemperature - nextTemperature) / (countObservationInTransitionExtremum + 1);
-      temperature = prevTemperature - shift * (Math.random() + currentCountObservation);
+      double shift =
+          (prevTemperature - nextTemperature) / (countObservationInTransitionExtremum + 1);
+      temperature = prevTemperature - shift * (getRandomRateValue() + currentCountObservation);
     }
     currentCountObservation++;
     logger.info("temperature{} = {};", currentCountObservation, temperature);
