@@ -84,22 +84,30 @@ public class Launcher {
     while (true) {
       if (!clQueue.isEmpty()) {
         Building building = clQueue.poll();
-        if (building != null)
+        if (building != null) {
+          long diff = building.getTimeForObserve() - System.currentTimeMillis();
+          if (diff > 0) {
+            sleepThread(diff);
+          }
           updateBuildObsRes(building);
+        }
+      } else {
+        sleepThread(1000); // если ни одно устройство не успело перезаписаться в список,
+                           // то слипаем на 1 секунду минимум (не должно произойти)
       }
+    }
+  }
+
+  private static void sleepThread(long diff) {
+    try {
+      Thread.sleep(diff);
+    } catch (Exception e) {
+      logger.error(e.getMessage(), e);
     }
   }
 
   public static void updateBuildObsRes(Building b) {
     executor.execute(() -> {
-      long diff = b.getTimeForObserve() - System.currentTimeMillis();
-      if (diff > 0) {
-        try {
-          Thread.sleep(diff);
-        } catch (Exception e) {
-          e.printStackTrace();
-        }
-      }
       b.updateBuildObsRes();
       b.setTimeForObserve(b.getTimeForObserve() + config.scheduledDelayObserve() * 1000);
       clQueue.add(b);
